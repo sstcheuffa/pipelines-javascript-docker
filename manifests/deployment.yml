@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: sstcheuffapipelinesjavascriptdocker 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sstcheuffapipelinesjavascriptdocker
+  template:
+    metadata:
+      labels:
+        app: sstcheuffapipelinesjavascriptdocker 
+    spec:
+      containers:
+        - name: sstcheuffapipelinesjavascriptdocker 
+          image: mypipelineregistry.azurecr.io/sstcheuffapipelinesjavascriptdocker
+          ports:
+          - containerPort: 8080
