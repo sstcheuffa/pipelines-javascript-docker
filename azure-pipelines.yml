@@ -30,8 +30,7 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      selfhostedpool
+    pool: myselfhostedpool
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
@@ -54,8 +53,7 @@ stages:
   - deployment: Deploy
     condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
     displayName: Deploy
-    pool:
-      selfhostedpool
+    pool: myselfhostedpool
     environment: 'sstcheuffapipelinesjavascriptdocker.default'
     strategy:
       runOnce:
@@ -83,8 +81,7 @@ stages:
   - deployment: DeployPullRequest
     displayName: Deploy Pull request
     condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/pull/'))
-    pool:
-      selfhostedpool
+    pool: myselfhostedpool
 
     environment: 'sstcheuffapipelinesjavascriptdocker.$(k8sNamespaceForPR)'
     strategy:
